@@ -1,0 +1,92 @@
+<div class="container">
+  <h1>Registro o Login</h1>
+  <div class="md-form">
+    <input mdbInput type="text" id="form1" class="form-control" [(ngModel)]="input.username">
+    <label for="form1" class="">Usuario</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form2" class="form-control" [(ngModel)]="input.password">
+    <label for="form2" class="">Contraseña</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form3" class="form-control" [(ngModel)]="input.email">
+    <label for="form3" class="">Email</label>
+  </div>
+  <span>**Para registro rellene los 3 campos y para iniciar sesión solo Usuario y contraseña.</span><br>
+  <button (click)="registerUser()" type="button" mdbBtn color="primary" mdbWavesEffect>Registrarse</button>
+  <button (click)="loginUser()" type="button" mdbBtn color="success" mdbWavesEffect>Iniciar Sesión</button>
+</div>
+<br>
+<br>
+<div class="container">
+  <div class="container" *ngIf="monitorings.length != 0; else empty">
+    <h2>Lista de películas</h2>
+    <span>**Haga click en un campo de la tabla para cargar los datos en el formulario de más abajo</span>
+    <table mdbTable>
+      <thead class="blue white-text">
+        <tr>
+          <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mdbTableCol *ngFor="let monitoring of monitorings">
+          <th scope="row" (click)="monitoringClicked(monitoring)">{{monitoring.id}}</th>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.date}}</td>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.energy}}</td>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.reactive_energy}}</td>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.power}}</td>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.maximeter}}</td>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.reactive_power}}</td>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.voltage}}</td>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.intensity}}</td>
+          <td (click)="monitoringClicked(monitoring)">{{monitoring.power_factor}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #empty>
+    <div class="container">No existen datos en la base de datos</div>
+  </ng-template>
+
+  <hr>
+  <div class="md-form">
+    <input mdbInput type="text" id="form3" class="form-control" [(ngModel)]="selectedMonitoring.date">
+    <label for="form3" class="">Date</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form1" class="form-control" [(ngModel)]="selectedMonitoring.energy">
+    <label for="form1" class="">Energy</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form2" class="form-control" [(ngModel)]="selectedMonitoring.reactive_energy">
+    <label for="form2" class="">Reactive Energy</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form3" class="form-control" [(ngModel)]="selectedMonitoring.power">
+    <label for="form3" class="">Power</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form3" class="form-control" [(ngModel)]="selectedMonitoring.maximeter">
+    <label for="form3" class="">Maximeter</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form3" class="form-control" [(ngModel)]="selectedMonitoring.reactive_power">
+    <label for="form3" class="">Reactive Power</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form3" class="form-control" [(ngModel)]="selectedMonitoring.voltage">
+    <label for="form3" class="">Voltage</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form3" class="form-control" [(ngModel)]="selectedMonitoring.intensity">
+    <label for="form3" class="">Intensity</label>
+  </div>
+  <div class="md-form">
+    <input mdbInput type="text" id="form3" class="form-control" [(ngModel)]="selectedMonitoring.power_factor">
+    <label for="form3" class="">Power Factor</label>
+  </div>
+
+  <button *ngIf="selectedMonitoring.id != -1" (click)="updateMonitoring()" type="button" mdbBtn color="primary" mdbWavesEffect>MODIFICAR</button>
+  <button *ngIf="selectedMonitoring.id == -1"(click)="createMonitoring()" type="button" mdbBtn color="primary" mdbWavesEffect>CREAR</button>
+  <button *ngIf="selectedMonitoring.id != -1" (click)="deleteMonitoring()" type="button" mdbBtn color="primary" mdbWavesEffect>BORRAR</button>
+</div>
